@@ -40,10 +40,10 @@ def get_user():
     user = User.query.filter_by(username=name).first()
     if user :
 
-        return 'User name:%s email: %s' % (user.username, user.email)
-    return 'False'
+        return 'User name:%s email: %s \n' % (user.username, user.email)
+    return 'False \n'
 
-@app.route('/add')
+@app.route('/add', methods=['GET', 'POST'])
 def add_user():
     query = request.values.to_dict()
     name = query.get('name', '')
@@ -53,9 +53,9 @@ def add_user():
         try:
             db.session.add(new_user)
             db.session.commit()
-	    return 'True'
+	    return 'True\n'
         except:
-	    return 'False'
+	    return 'False\n'
     return "name and email not None"
 
 if __name__ == "__main__":
