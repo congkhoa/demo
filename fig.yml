@@ -8,9 +8,9 @@ redis:
 db:
   image: postgres:9.4
   environment:
-        - USER=root
-        - PASS=my_pass
-        - DB=my_db
+        - POSTGRES_USER='root'
+        - POSTGRES_PASSWORD='my_pass'
+        - DB='postgres'
   ports:
         - "5432"
   volumes:
