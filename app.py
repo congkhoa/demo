@@ -10,6 +10,7 @@ redis = Redis(host="redis_1", port=6379)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:@db/postgres'
 db = SQLAlchemy(app)
 
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True)
@@ -24,6 +25,7 @@ class User(db.Model):
 
 
 
+#db.create_all()
 
 @app.route('/')
 def hello():
