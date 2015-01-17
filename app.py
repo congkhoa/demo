@@ -33,10 +33,28 @@ def hello():
 
 @app.route('/user')
 def get_user():
-    users = User.query.all()
-    user = users[0]
-    return 'User name:%s email: %s' % (user.username, user.email)
+    query = request.values.to_dict()
+    name = query.get('name', '')
+    user = User.query.filter_by(username=name).first()
+    if user :
 
+        return 'User name:%s email: %s' % (user.username, user.email)
+    return 'False'
+
+@app.route('/add')
+def add_user():
+    query = request.values.to_dict()
+    name = query.get('name', '')
+    email = query.get('email', '')
+    if name and email:
+        new_user = User(name, email)
+        try:
+            db.session.add(new_user)
+            db.session.commit()
+	    return 'True'
+        except:
+	    return 'False'
+    return "name and email not None"
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", debug=True)
