@@ -6,7 +6,7 @@ redis:
         - "6379"
 
 db:
-  image: postgres:9.4
+  image: matocnhoi/postgres:1
 #  environment:
 #        - POSTGRES_USER:'root'
 #        - POSTGRES_PASSWORD:'my_pass'
