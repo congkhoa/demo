@@ -1,0 +1,28 @@
+redis:
+  image: orchardup/redis
+  volumes:
+        - /var/docker/redis:data
+  ports:
+        - "6379"
+
+db:
+  image: postgres
+  environment:
+        - USER=root
+        - PASS=my_pass
+        - DB=my_db
+  ports:
+        - "5432"
+  volumes:
+        - /var/docker/postgresql:data
+
+web:
+  build: .
+  command: python app.py
+  ports:
+  - "5000:5000"
+  volumes:
+  - .:/code
+  links:
+  - redis
+  - db
